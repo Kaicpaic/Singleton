@@ -1,76 +1,63 @@
-interface IPolaczenie {
+interface IConnection {
 
-    char get(int indeks);
+    char get(int index);
 
-    void set(int indeks, char c);
+    void set(int index, char c);
 
     int length();
 
 }
 
-final class Baza {  // KLASA FINALNA ABY ZABLOKOWAĆ DZIDZICZENIE I NP. KLONOWANIE LUB SERIALIZACJĘ
-    private static Baza instance = new Baza();  // WCZESNA INICJALIZACJA
+final class Base {  // FINAL CLASS TO BLOCK INITIATION AND E.G. CLONING OR SERIALIZATION
+    private static Base instance = new Base();  // EARLY INITIALIZATION
     private char[] tab = new char[100];
 
-    private Baza() {
+    private Base() {
 
     }
 
-    public static Baza getInstance() {
+    public static Base getInstance() {
 /*
-        PÓŹNA INICJALIZACJA
+        LATE INITIALIZATION:
 
         if (instance == null) {
-            instance = new Baza();
+            instance = new Base();
         }
 */
         return instance;
     }
 
-    public static IPolaczenie getPolaczenie() {
+    public static IConnection getConnection() {
 
-        return Polaczenie.getInstance();
+        return Connection.getInstance();
 
     }
 
-    private static class Polaczenie implements IPolaczenie {
+    private static class Connection implements IConnection {
 
-        private static Baza baza = Baza.getInstance();
-        private static int kolejnosc = 0;
-        // WCZESNA INICJALIZACJA:
-        private static Polaczenie instances[] = {new Polaczenie(), new Polaczenie(), new Polaczenie()};
+        private static Base base = Base.getInstance();
+        private static int sequence = 0;
+        //EARLY INITIALIZATION:
+        private static Connection instances[] = {new Connection(), new Connection(), new Connection()};
 
-        private Polaczenie() {
+        private Connection() {
         }
 
-        public static IPolaczenie getInstance() {
-/*
-            PÓŹNA INICJALIZACJA
-
-            if (instances == null) {
-                instances = new Polaczenie[3];
-            }
-*/
-            kolejnosc = (kolejnosc + 1) % instances.length;
-            return instances[kolejnosc];
+        public static IConnection getInstance() {
+            sequence = (sequence + 1) % instances.length;
+            return instances[sequence];
         }
 
-        public char get(int indeks) {
-
-            return baza.tab[indeks];
-
+        public char get(int index) {
+            return base.tab[index];
         }
 
-        public void set(int indeks, char c) {
-
-            baza.tab[indeks] = c;
-
+        public void set(int index, char c) {
+            base.tab[index] = c;
         }
 
         public int length() {
-
-            return baza.tab.length;
-
+            return base.tab.length;
         }
 
     }
@@ -79,49 +66,49 @@ final class Baza {  // KLASA FINALNA ABY ZABLOKOWAĆ DZIDZICZENIE I NP. KLONOWAN
 
 public class Main {
     public static void main(String[] args) {
-        IPolaczenie polaczenie1 = Baza.getPolaczenie();
-        IPolaczenie polaczenie2 = Baza.getPolaczenie();
-        IPolaczenie polaczenie3 = Baza.getPolaczenie();
-        IPolaczenie polaczenie4 = Baza.getPolaczenie();
+        IConnection connection1 = Base.getConnection();
+        IConnection connection2 = Base.getConnection();
+        IConnection connection3 = Base.getConnection();
+        IConnection connection4 = Base.getConnection();
 
-        System.out.println(polaczenie1);
-        System.out.println(polaczenie2);
-        System.out.println(polaczenie3);
-        System.out.println(polaczenie4);
+        System.out.println(connection1);
+        System.out.println(connection2);
+        System.out.println(connection3);
+        System.out.println(connection4);
 
-        System.out.print("\nDodawanie indeksów");
-        polaczenie1.set(1, '1');
-        polaczenie2.set(2, '2');
-        polaczenie3.set(3, '3');
-        polaczenie4.set(4, '4');
+        System.out.print("\nAdding indexes");
+        connection1.set(1, '1');
+        connection2.set(2, '2');
+        connection3.set(3, '3');
+        connection4.set(4, '4');
         System.out.println(".\n");
 
-        System.out.println("Połączenie 1:");
-        System.out.println(polaczenie1.get(1));
-        System.out.println(polaczenie1.get(2));
-        System.out.println(polaczenie1.get(3));
-        System.out.println(polaczenie1.get(4));
+        System.out.println("Connection 1:");
+        System.out.println(connection1.get(1));
+        System.out.println(connection1.get(2));
+        System.out.println(connection1.get(3));
+        System.out.println(connection1.get(4));
         System.out.println("■\n");
 
-        System.out.println("Połączenie 2:");
-        System.out.println(polaczenie2.get(1));
-        System.out.println(polaczenie2.get(2));
-        System.out.println(polaczenie2.get(3));
-        System.out.println(polaczenie2.get(4));
+        System.out.println("Connection 2:");
+        System.out.println(connection2.get(1));
+        System.out.println(connection2.get(2));
+        System.out.println(connection2.get(3));
+        System.out.println(connection2.get(4));
         System.out.println("■\n");
 
-        System.out.println("Połączenie 3:");
-        System.out.println(polaczenie3.get(1));
-        System.out.println(polaczenie3.get(2));
-        System.out.println(polaczenie3.get(3));
-        System.out.println(polaczenie3.get(4));
+        System.out.println("Connection 3:");
+        System.out.println(connection3.get(1));
+        System.out.println(connection3.get(2));
+        System.out.println(connection3.get(3));
+        System.out.println(connection3.get(4));
         System.out.println("■\n");
 
-        System.out.println("Połączenie 4:");
-        System.out.println(polaczenie4.get(1));
-        System.out.println(polaczenie4.get(2));
-        System.out.println(polaczenie4.get(3));
-        System.out.println(polaczenie4.get(4));
+        System.out.println("Connection 4:");
+        System.out.println(connection4.get(1));
+        System.out.println(connection4.get(2));
+        System.out.println(connection4.get(3));
+        System.out.println(connection4.get(4));
         System.out.println("■");
     }
 }
