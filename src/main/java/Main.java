@@ -79,6 +79,49 @@ final class Baza {  // KLASA FINALNA ABY ZABLOKOWAĆ DZIDZICZENIE I NP. KLONOWAN
 
 public class Main {
     public static void main(String[] args) {
+        IPolaczenie polaczenie1 = Baza.getPolaczenie();
+        IPolaczenie polaczenie2 = Baza.getPolaczenie();
+        IPolaczenie polaczenie3 = Baza.getPolaczenie();
+        IPolaczenie polaczenie4 = Baza.getPolaczenie();
 
+        System.out.println(polaczenie1);
+        System.out.println(polaczenie2);
+        System.out.println(polaczenie3);
+        System.out.println(polaczenie4);
+
+        System.out.print("\nDodawanie indeksów");
+        polaczenie1.set(1, '1');
+        polaczenie2.set(2, '2');
+        polaczenie3.set(3, '3');
+        polaczenie4.set(4, '4');
+        System.out.println(".\n");
+
+        System.out.println("Połączenie 1:");
+        System.out.println(polaczenie1.get(1));
+        System.out.println(polaczenie1.get(2));
+        System.out.println(polaczenie1.get(3));
+        System.out.println(polaczenie1.get(4));
+        System.out.println("■\n");
+
+        System.out.println("Połączenie 2:");
+        System.out.println(polaczenie2.get(1));
+        System.out.println(polaczenie2.get(2));
+        System.out.println(polaczenie2.get(3));
+        System.out.println(polaczenie2.get(4));
+        System.out.println("■\n");
+
+        System.out.println("Połączenie 3:");
+        System.out.println(polaczenie3.get(1));
+        System.out.println(polaczenie3.get(2));
+        System.out.println(polaczenie3.get(3));
+        System.out.println(polaczenie3.get(4));
+        System.out.println("■\n");
+
+        System.out.println("Połączenie 4:");
+        System.out.println(polaczenie4.get(1));
+        System.out.println(polaczenie4.get(2));
+        System.out.println(polaczenie4.get(3));
+        System.out.println(polaczenie4.get(4));
+        System.out.println("■");
     }
 }
