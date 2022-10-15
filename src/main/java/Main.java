@@ -9,21 +9,17 @@ interface IConnection {
 }
 
 final class Base {  // FINAL CLASS TO BLOCK INITIATION AND E.G. CLONING OR SERIALIZATION
-    private static Base instance = new Base();  // EARLY INITIALIZATION
-    private char[] tab = new char[100];
+    private static Base instance;
+    private final char[] tab = new char[100];
 
     private Base() {
 
     }
 
     public static Base getInstance() {
-/*
-        LATE INITIALIZATION:
-
         if (instance == null) {
             instance = new Base();
         }
-*/
         return instance;
     }
 
@@ -35,10 +31,10 @@ final class Base {  // FINAL CLASS TO BLOCK INITIATION AND E.G. CLONING OR SERIA
 
     private static class Connection implements IConnection {
 
-        private static Base base = Base.getInstance();
+        private static final Base base = Base.getInstance();
         private static int sequence = 0;
         //EARLY INITIALIZATION:
-        private static Connection instances[] = {new Connection(), new Connection(), new Connection()};
+        private static final Connection[] instances = {new Connection(), new Connection(), new Connection()};
 
         private Connection() {
         }
